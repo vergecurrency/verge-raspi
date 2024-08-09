@@ -67,6 +67,23 @@ Block Number Range | Reward
 * [Facebook](https://www.facebook.com/VERGEcurrency/)
 * [Reddit](https://www.reddit.com/r/vergecurrency/)
 
+## Building on Raspberry Pi 5
+
+Step 1. Download Berkeley DB 4.8 and compile for aarch64
+
+wget http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz
+tar -xzvf db-4.8.30.NC.tar.gz
+cd db-4.8.30.NC/build_unix
+../dist/configure --enable-cxx --build=aarch64-unknown-linux-gnu
+make
+sudo make install
+sudo ln -s /usr/local/BerkeleyDB.4.8/lib/libdb-4.8.so /usr/lib/libdb-4.8.so
+sudo ln -s /usr/local/BerkeleyDB.4.8/lib/libdb_cxx-4.8.so /usr/lib/libdb_cxx-4.8.so
+
+Step 2. 
+
+
+
 ## Wallets
 
 Binary (pre-compiled) wallets are available on all platforms at [https://vergecurrency.com](https://vergecurrency.com/#wallets).
