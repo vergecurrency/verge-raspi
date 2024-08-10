@@ -82,7 +82,18 @@ sudo ln -s /usr/local/BerkeleyDB.4.8/lib/libdb-4.8.so /usr/lib/libdb-4.8.so
 sudo ln -s /usr/local/BerkeleyDB.4.8/lib/libdb_cxx-4.8.so /usr/lib/libdb_cxx-4.8.so
 ```
 
-Step 2. Install/Build all remaining dependencies for aarch64 
+Step 2. Download and compile openssl 
+```
+wget https://www.openssl.org/source/old/1.0.2/openssl-1.0.2u.tar.gz
+tar -xzvf openssl-1.0.2u.tar.gz
+cd openssl-1.0.2u.tar.gz
+./Configure linux-aarch64 -no-camellia -no-capieng -no-cast -no-comp -no-dso -no-dtl -no-ec_nistp_64_gcc_128 -no-gost -no-gmp -no-heartbeats -no-idea -no-jpake -no-krb5 -no-libunbound -no-md2 -no-rc4 -no-rc5 -no-rdrand -no-rfc3779 -no-rsax -no-sctp -no-seed -no-sha0 -no-shared -no-ssl-trace -no-ssl2 -no-ssl3 -no-static_engine -no-store -no-unit-test -no-weak-ssl-ciphers -no-whirlpool -no-zlib -no-zlib-dynamic
+make depend
+make
+sudo make install
+```
+
+Step 3. Install/Build all remaining dependencies for aarch64 
 ```
 apt install libseccomp-dev git build-essential xutils-dev libtool gperf autotools-dev automake pkg-config bsdmainutils libattr1-dev make automake bison byacc cmake curl bison byacc python3 libcap-dev
 cd /verge/depends
