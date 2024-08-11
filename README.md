@@ -112,13 +112,21 @@ cd /usr/local/lib
 cp *.* /home/raspi/verge/depends/aarch64-unknown-linux-gnu/lib
 ```
 
-Step 5. Compile Verge!
+Step 5. Compile Verge! (GUI Wallet and Daemons/cli, for compiling the daemons and cli without the gui wallet, see next step)
 ```
+cd ~/verge
 ./autogen.sh
 CONFIG_SITE=$PWD/depends/aarch64-unknown-linux-gnu/share/config.site ./configure --build=aarch64-unknown-linux-gnu -disable-bench --disable-tests --disable-dependency-tracking --disable-werror --bindir=`pwd`/release/bin
 make
 ```
 
+Optional Step 5. Compile Verge! (Daemon and cli only!)
+```
+cd ~verge
+./autogen.sh
+CONFIG_SITE=$PWD/depends/aarch64-unknown-linux-gnu/share/config.site ./configure --build=aarch64-unknown-linux-gnu -disable-bench --disable-tests --disable-dependency-tracking --disable-werror --bindir=`pwd`/release/bin --without-gui
+make
+```
 
 
 ## Wallets
