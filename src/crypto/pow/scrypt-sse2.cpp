@@ -35,8 +35,6 @@
 #include <string.h>
 #include <openssl/sha.h>
 
-#include <emmintrin.h>
-
 #ifdef __FreeBSD__
 #include <sys/endian.h>
 #endif
