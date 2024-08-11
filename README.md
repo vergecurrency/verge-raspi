@@ -99,9 +99,27 @@ apt install libseccomp-dev git build-essential xutils-dev libtool gperf autotool
 cd /verge/depends
 make -j4 HOST=aarch64-unknown-linux-gnu
 cd ..
-./autogen.sh
-./configure CPPFLAGS="-I/usr/local/BerkeleyDB.4.8/include -O2" LDFLAGS="-L/usr/local/BerkeleyDB.4.8/lib" --build=aarch64-unknown-linux-gnu -disable-bench --disable-tests --disable-dependency-tracking --disable-werror --bindir=`pwd`/release/bin --libdir=`pwd`/release/lib
 ```
+
+Step 4. Compile and Install Libevent 
+```
+wget https://github.com/libevent/libevent/releases/download/release-2.1.8-stable/libevent-2.1.8-stable.tar.gz
+cd libevent-2.1.8-stable
+you will need to patch the last 3 files https://github.com/libevent/libevent/commit/6541168d7037457b8e5c51cc354f11bd94e618b6 (you can ignore the CmakeLists.txt)
+./autogen.sh && ./configure 
+sudo make install
+cd /usr/local/lib
+cp *.* /home/raspi/verge/depends/aarch64-unknown-linux-gnu/lib
+```
+
+Step 5. Compile Verge!
+```
+./autogen.sh
+CONFIG_SITE=$PWD/depends/aarch64-unknown-linux-gnu/share/config.site ./configure --build=aarch64-unknown-linux-gnu -disable-bench --disable-tests --disable-dependency-tracking --disable-werror --bindir=`pwd`/release/bin
+make
+```
+
+
 
 ## Wallets
 
