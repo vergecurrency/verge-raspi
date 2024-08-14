@@ -16,7 +16,6 @@ define $(package)_set_vars
 endef
 
 define $(package)_preprocess_cmds
-  cp -f $(BASEDIR)/config.guess $(BASEDIR)/config.sub build-aux
   patch -p1 -i $($(package)_patch_dir)/arc4random.patch
 endef
 
