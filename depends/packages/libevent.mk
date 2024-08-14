@@ -5,10 +5,6 @@ $(package)_file_name=release-$($(package)_version).tar.gz
 $(package)_sha256_hash=316ddb401745ac5d222d7c529ef1eada12f58f6376a66c1118eee803cb70f83d
 $(package)_patches = arc4random.patch
 
-define $(package)_preprocess_cmds
-  ./autogen.sh
-endef
-
 define $(package)_set_vars
   $(package)_config_opts=--disable-shared --disable-openssl --disable-libevent-regress --disable-samples
   $(package)_config_opts_release=--disable-debug-mode
@@ -16,6 +12,7 @@ define $(package)_set_vars
 endef
 
 define $(package)_preprocess_cmds
+  autogen.sh && \
   patch -p1 -i $($(package)_patch_dir)/arc4random.patch
 endef
 
