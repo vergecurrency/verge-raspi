@@ -109,7 +109,7 @@ you will need to patch the last 3 files https://github.com/libevent/libevent/com
 ./autogen.sh && ./configure 
 sudo make install
 cd /usr/local/lib
-cp *.* /home/raspi/verge/depends/aarch64-unknown-linux-gnu/lib
+cp *.* /home/raspi/verge/depends/aarch64-linux-gnu/lib
 ```
 
 Step 5. Compile Verge! (GUI Wallet and Daemons/cli, for compiling the daemons and cli without the gui wallet, see next step)
