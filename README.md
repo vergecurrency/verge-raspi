@@ -75,7 +75,7 @@ Step 1. Download Berkeley DB 4.8 and compile for aarch64
 wget http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz
 tar -xzvf db-4.8.30.NC.tar.gz
 cd db-4.8.30.NC/build_unix
-../dist/configure --enable-cxx --build=aarch64-unknown-linux-gnu
+../dist/configure --enable-cxx --build=aarch64-linux-gnu
 make
 sudo make install
 sudo ln -s /usr/local/BerkeleyDB.4.8/lib/libdb-4.8.so /usr/lib/libdb-4.8.so
@@ -97,7 +97,7 @@ Step 3. Install/Build all remaining dependencies for aarch64
 ```
 apt install libseccomp-dev git build-essential xutils-dev libtool gperf autotools-dev automake pkg-config bsdmainutils libattr1-dev make automake bison byacc cmake curl bison byacc python3 libcap-dev
 cd /verge/depends
-make -j4 HOST=aarch64-unknown-linux-gnu
+make -j4 HOST=aarch64-linux-gnu
 cd ..
 ```
 
@@ -124,7 +124,7 @@ Optional Step 5. Compile Verge! (Daemon and cli only!)
 ```
 cd ~verge
 ./autogen.sh
-CONFIG_SITE=$PWD/depends/aarch64-unknown-linux-gnu/share/config.site ./configure --build=aarch64-unknown-linux-gnu -disable-bench --disable-tests --disable-dependency-tracking --disable-werror --bindir=`pwd`/release/bin --without-gui
+CONFIG_SITE=$PWD/depends/aarch64-linux-gnu/share/config.site ./configure --build=aarch64-linux-gnu -disable-bench --disable-tests --disable-dependency-tracking --disable-werror --bindir=`pwd`/release/bin --without-gui
 make
 ```
 
