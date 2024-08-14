@@ -11,7 +11,7 @@
 </p>
 <br>
 
-# VERGE Source Code [XVG]
+# VERGECurrency ($XVG) Source Code for Raspberry Pi (tested on Pi 5)
 
 <p align="left">
   <a href="https://github.com/vergecurrency/verge/actions/workflows/build-all-and-release.yml">
