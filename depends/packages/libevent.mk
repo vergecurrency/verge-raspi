@@ -12,8 +12,8 @@ define $(package)_set_vars
 endef
 
 define $(package)_preprocess_cmds
-  autogen.sh && \
-  patch -p1 -i $($(package)_patch_dir)/arc4random.patch
+  patch -p1 -i $($(package)_patch_dir)/arc4random.patch && \
+  autoreconf -fi
 endef
 
 define $(package)_config_cmds
