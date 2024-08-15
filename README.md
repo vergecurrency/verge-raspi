@@ -70,30 +70,7 @@ Block Number Range | Reward
 
 ## Building on Raspberry Pi 5
 
-Step 1. Download Berkeley DB 4.8 and compile for aarch64
-```
-wget http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz
-tar -xzvf db-4.8.30.NC.tar.gz
-cd db-4.8.30.NC/build_unix
-../dist/configure --enable-cxx --build=aarch64-linux-gnu
-make
-sudo make install
-sudo ln -s /usr/local/BerkeleyDB.4.8/lib/libdb-4.8.so /usr/lib/libdb-4.8.so
-sudo ln -s /usr/local/BerkeleyDB.4.8/lib/libdb_cxx-4.8.so /usr/lib/libdb_cxx-4.8.so
-```
-
-Step 2. Download and compile openssl 
-```
-wget https://www.openssl.org/source/old/1.0.2/openssl-1.0.2u.tar.gz
-tar -xzvf openssl-1.0.2u.tar.gz
-cd openssl-1.0.2u.tar.gz
-./Configure linux-aarch64 -no-camellia -no-capieng -no-cast -no-comp -no-dso -no-dtl -no-ec_nistp_64_gcc_128 -no-gost -no-gmp -no-heartbeats -no-idea -no-jpake -no-krb5 -no-libunbound -no-md2 -no-rc4 -no-rc5 -no-rdrand -no-rfc3779 -no-rsax -no-sctp -no-seed -no-sha0 -no-shared -no-ssl-trace -no-ssl2 -no-ssl3 -no-static_engine -no-store -no-unit-test -no-weak-ssl-ciphers -no-whirlpool -no-zlib -no-zlib-dynamic
-make depend
-make
-sudo make install
-```
-
-Step 3. Install/Build all remaining dependencies for aarch64 
+Step 1. Install/Build all dependencies for aarch64 
 ```
 apt install libseccomp-dev git build-essential xutils-dev libtool gperf autotools-dev automake pkg-config bsdmainutils libattr1-dev make automake bison byacc cmake curl bison byacc python3 libcap-dev
 cd /verge/depends
@@ -101,31 +78,18 @@ make -j4 HOST=aarch64-linux-gnu
 cd ..
 ```
 
-Step 4. Compile and Install Libevent 
+Step 2. Compile Verge GUI Wallet/Full Node, Full Node Dameon, and CLI on Raspberry Pi 5! (To build Full Node Daemon and CLI -only-, skip this step and follow next step!)
 ```
-wget https://github.com/libevent/libevent/releases/download/release-2.1.8-stable/libevent-2.1.8-stable.tar.gz
-cd libevent-2.1.8-stable
-you will need to patch the last 3 files https://github.com/libevent/libevent/commit/6541168d7037457b8e5c51cc354f11bd94e618b6 (you can ignore the CmakeLists.txt)
-./autogen.sh && ./configure 
-sudo make install
-cd /usr/local/lib
-cp *.* /home/raspi/verge/depends/aarch64-linux-gnu/lib
+./autogen.sh
+CONFIG_SITE=$PWD/depends/aarch64-linux-gnu/share/config.site ./configure --build=aarch64-linux-gnu -disable-bench --disable-tests --disable-dependency-tracking --disable-werror --bindir=`pwd`/release/bin
+make -j2
 ```
 
-Step 5. Compile Verge! (GUI Wallet and Daemons/cli, for compiling the daemons and cli without the gui wallet, see next step)
+Optional Step 2. Compile Verge with Full Node Daemon and CLI only)
 ```
-cd ~/verge
 ./autogen.sh
-CONFIG_SITE=$PWD/depends/aarch64-unknown-linux-gnu/share/config.site ./configure --build=aarch64-unknown-linux-gnu -disable-bench --disable-tests --disable-dependency-tracking --disable-werror --bindir=`pwd`/release/bin
-make
-```
-
-Optional Step 5. Compile Verge! (Daemon and cli only!)
-```
-cd ~verge
-./autogen.sh
-CONFIG_SITE=$PWD/depends/aarch64-linux-gnu/share/config.site ./configure --build=aarch64-linux-gnu -disable-bench --disable-tests --disable-dependency-tracking --disable-werror --bindir=`pwd`/release/bin --without-gui
-make
+CONFIG_SITE=$PWD/depends/aarch64-linux-gnu/share/config.site ./configure --without-gui --build=aarch64-linux-gnu -disable-bench --disable-tests --disable-dependency-tracking --disable-werror --bindir=`pwd`/release/bin
+make -j2
 ```
 
 
