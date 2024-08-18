@@ -3,7 +3,7 @@ on:
 jobs:
   
   linux:
-    runs-on: garm-ubuntu-2204-smaller
+    runs-on: arm-ubuntu-22
 
     steps:
       - uses: actions/checkout@v4
